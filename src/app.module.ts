@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { TasksModule } from './tasks/tasks.module';
+import { TaskEntity } from './tasks/entities/task.entity';
 
 @Module({
   imports: [
@@ -13,9 +15,10 @@ import { ConfigModule } from '@nestjs/config';
       url: process.env.POSTGRES_URL,
       synchronize: true, // not in production
       logging: true,
-      entities: ['src/entity/*.*'],
+      entities: [TaskEntity],
       autoLoadEntities: true,
     }),
+    TasksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
